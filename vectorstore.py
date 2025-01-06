@@ -1,4 +1,4 @@
-from langchain_huggingface import HuggingFaceEmbeddings
+from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.schema import Document
 from langchain_pinecone import PineconeVectorStore
@@ -40,10 +40,11 @@ def get_pinecone_index():
     return singleton_cache["pinecone_index"]
 
 def get_embedding_model():
+    os.environ['GOOGLE_API_KEY'] = os.getenv('GEMINI_API_KEY')
     if "embedding_model" in singleton_cache:
         return singleton_cache["embedding_model"]
 
-    embeddings = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
+    embeddings = GoogleGenerativeAIEmbeddings(model="models/text-embedding-004")
     singleton_cache["embedding_model"] = embeddings
     return embeddings
 
