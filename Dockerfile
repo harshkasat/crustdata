@@ -21,4 +21,4 @@ EXPOSE 8000
 
 
 # Command to start the application with Chainlit
-CMD ["chainlit", "run", "my_cl_app.py", "-h", "0.0.0.0", "-p", "8000"]
+CMD ["chainlit", "run", "--host", "0.0.0.0", "--port", "8000", "my_cl_app.py"]
